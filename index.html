@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cat Facts</title>
+<style>
+  table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+  th, td {
+    padding: 5px;
+    text-align: left;
+  }
+</style>
+</head>
+<body>
+
+<h1>Cat Facts</h1>
+<button id="loadFacts">Load Cat Facts</button>
+<table id="factsTable">
+  <tr>
+    <th>Fact ID</th>
+    <th>Fact</th>
+  </tr>
+  
+</table>
+
+<h2>Cat Photo:</h2>
+<img id="catPhoto" src="/Cat_August_2010-4.jpg.webp" alt="Cat" width="300">
+<script>
+const apiData = {
+    "facts": [
+        {
+            "text": "Owning a cat can reduce the risk of stroke and heart attack by a third.",
+            "factId": 1
+        },
+        {
+            "text": "Most cats are lactose intolerant, and milk can cause painful stomach cramps and diarrhea. It's best to forego the milk and just give your cat the standard: clean, cool drinking water.",
+            "factId": 4
+        },
+        {
+            "text": "Domestic cats spend about 70 percent of the day sleeping and 15 percent of the day grooming.",
+            "factId": 2
+        },
+        {
+            "text": "The frequency of a domestic cat's purr is the same at which muscles and bones repair themselves.",
+            "factId": 5
+        },
+        {
+            "text": "Cats are the most popular pet in the United States: There are 88 million pet cats and 74 million dogs.",
+            "factId": 3
+        }
+    ],
+    "catPhoto": "https://cdn.discordapp.com/attachments/1199530280189444177/1220479785982230758/IMG_0586.JPG?ex=660f1760&is=65fca260&hm=635802358923eefad04cf126a8338f8466f52ebc2629257c174c0f0ebf3b1d3f&"
+};
+
+
+function loadFacts() {
+  const sortedFacts = apiData.facts.sort((a, b) => a.factId - b.factId);
+  const table = document.getElementById('factsTable');
+  
+ 
+  sortedFacts.forEach(fact => {
+    const row = table.insertRow();
+    const cell1 = row.insertCell(0);
+    const cell2 = row.insertCell(1);
+    cell1.textContent = fact.factId;
+    cell2.textContent = fact.text;
+  });
+
+  document.getElementById('catPhoto').src = apiData.catPhoto;
+}
+document.getElementById('loadFacts').addEventListener('click', loadFacts);
+</script>
+
+</body>
+</html>
